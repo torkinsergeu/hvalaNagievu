@@ -121,7 +121,18 @@ class ColorPaletteSite {
     const containerCenter =
       this.spinningOverlay.querySelector(".roulette-container").offsetWidth / 2;
     const trackPosition = -1100; // Финальная позиция из анимации
-    const itemWidth = 140; // 120px ширина + 20px отступы
+
+    // Вычисляем ширину элемента в зависимости от размера экрана
+    const viewportWidth = window.innerWidth;
+    let itemWidth;
+
+    if (viewportWidth <= 480) {
+      itemWidth = Math.max(50, viewportWidth * 0.18) + viewportWidth * 0.02; // 18vw + 2vw отступы
+    } else if (viewportWidth <= 768) {
+      itemWidth = Math.max(60, viewportWidth * 0.2) + viewportWidth * 0.02; // 20vw + 2vw отступы
+    } else {
+      itemWidth = Math.min(120, viewportWidth * 0.25) + viewportWidth * 0.03; // 25vw + 3vw отступы
+    }
 
     // Определяем индекс элемента под указателем
     const visibleItemIndex = Math.floor(
