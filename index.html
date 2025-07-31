@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Палитра цветов с анимацией</title>
+  </head>
+  <body>
+    <!-- Header с палитрой цветов -->
+    <header class="header">
+      <button
+        class="color-btn"
+        style="background-color: #ff6b6b"
+        data-bg="#ff6b6b"
+        data-text="#ffffff"
+      ></button>
+      <button
+        class="color-btn"
+        style="background-color: #4ecdc4"
+        data-bg="#4ecdc4"
+        data-text="#ffffff"
+      ></button>
+      <button
+        class="color-btn"
+        style="background-color: #45b7d1"
+        data-bg="#45b7d1"
+        data-text="#ffffff"
+      ></button>
+      <button
+        class="color-btn"
+        style="background-color: #f9ca24"
+        data-bg="#f9ca24"
+        data-text="#2c2c2c"
+      ></button>
+      <button
+        class="color-btn"
+        style="background-color: #6c5ce7"
+        data-bg="#6c5ce7"
+        data-text="#ffffff"
+      ></button>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+      <div class="welcome-text">
+        Выберите цвет сверху или нажмите на кнопку снизу
+      </div>
+    </main>
+
+    <!-- Footer с кнопками -->
+    <footer class="footer">
+      <button class="footer-btn" id="casesBtn">Кейсы</button>
+      <button class="footer-btn" id="miniGamesBtn">Мини игры</button>
+    </footer>
+
+    <!-- Overlay для анимации рулетки -->
+    <div class="spinning-overlay" id="spinningOverlay">
+      <div class="roulette-container">
+        <div class="winner-display" id="winnerDisplay"></div>
+        <div class="winning-indicator"></div>
+        <div class="roulette-track" id="rouletteTrack">
+          <!-- Элементы рулетки будут генерироваться JavaScript -->
+        </div>
+        <button class="close-btn" id="closeBtn">Закрыть</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
