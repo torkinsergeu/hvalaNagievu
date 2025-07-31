@@ -1,0 +1,370 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Header styles */
+.header {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.color-btn {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.color-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.color-btn:active {
+  transform: scale(0.95);
+}
+
+.color-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.color-btn:active::before {
+  width: 100%;
+  height: 100%;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+}
+
+.welcome-text {
+  font-size: 2rem;
+  text-align: center;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+/* Footer styles */
+.footer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-btn {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.footer-btn:active {
+  transform: translateY(0);
+}
+
+/* Roulette animation overlay */
+.spinning-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.roulette-container {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  height: 150px;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 3px solid #ecf0f1;
+}
+
+.roulette-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.roulette-item {
+  flex-shrink: 0;
+  width: 120px;
+  height: 100px;
+  background: linear-gradient(135deg, #fff, #f8f9fa);
+  margin: 0 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border: 2px solid #e9ecef;
+  position: relative;
+  overflow: hidden;
+}
+
+.roulette-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+.winning-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 120px;
+  background: linear-gradient(to bottom, #e74c3c, #c0392b);
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+  z-index: 10;
+}
+
+.close-btn {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0;
+  animation: showCloseBtn 0.5s ease 5s forwards;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rouletteMove {
+  0% {
+    transform: translateX(100%);
+  }
+  20% {
+    transform: translateX(-200px);
+  }
+  40% {
+    transform: translateX(-500px);
+  }
+  60% {
+    transform: translateX(-800px);
+  }
+  80% {
+    transform: translateX(-1000px);
+  }
+  100% {
+    transform: translateX(-1100px);
+  }
+}
+
+.roulette-track.spinning {
+  animation: rouletteMove 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.winner-display {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  box-shadow: 0 10px 30px rgba(243, 156, 18, 0.4);
+  border: 3px solid #fff;
+  opacity: 0;
+  animation: showWinner 0.8s ease 5s forwards;
+  z-index: 15;
+}
+
+.winner-display::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #f39c12, #e67e22, #d35400);
+  border-radius: 20px;
+  z-index: -1;
+  animation: winnerGlow 2s ease infinite;
+}
+
+@keyframes showWinner {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.5) rotateY(180deg);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2) rotateY(90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1) rotateY(0deg);
+  }
+}
+
+@keyframes winnerGlow {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes showCloseBtn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .color-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .welcome-text {
+    font-size: 1.5rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .roulette-container {
+    width: 90%;
+    max-width: 600px;
+    height: 120px;
+  }
+
+  .roulette-item {
+    width: 100px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .winning-indicator {
+    height: 100px;
+  }
+}
